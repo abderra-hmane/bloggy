@@ -16,6 +16,13 @@ Route::controller(App\Http\Controllers\PostController::class)->prefix('posts')->
     Route::put('/{post}', 'update')->name('posts.update');
     Route::delete('/{post}', 'destroy')->name('posts.destroy');
 });
+// Theme routes
+Route::controller(App\Http\Controllers\ThemeController::class)->prefix('theme')->group(function () {
+    Route::get('/{category}', 'index')->name('theme.index');
+    Route::get('/Contact', 'contact')->name('theme.contact');
+    Route::get('/About', 'about')->name('theme.about');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
