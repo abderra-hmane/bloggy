@@ -2,12 +2,15 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\ThemeController;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 // posts routes 
-Route::controller(App\Http\Controllers\PostController::class)->prefix('posts')->group(function () {
+Route::controller(PostController::class)->prefix('posts')->group(function () {
     Route::get('/', 'index')->name('posts.index');
     Route::get('/create', 'create')->name('posts.create');
     Route::post('/', 'store')->name('posts.store');
@@ -17,11 +20,19 @@ Route::controller(App\Http\Controllers\PostController::class)->prefix('posts')->
     Route::delete('/{post}', 'destroy')->name('posts.destroy');
 });
 // Theme routes
-Route::controller(App\Http\Controllers\ThemeController::class)->prefix('theme')->group(function () {
+Route::controller(ThemeController::class)->prefix('theme')->group(function () {
     Route::get('/{category}', 'index')->name('theme.index');
     Route::get('/Contact', 'contact')->name('theme.contact');
     Route::get('/About', 'about')->name('theme.about');
 });
+// Admin routes
+Route::controller(AdminController::class)->prefix('admin')->group(function () {
+    Route::get('/', 'index')->name('admin.index');
+    Route::get('/posts', 'posts')->name('admin.posts');
+    Route::get('/categories', 'categories')->name('admin.categories');
+    Route::get('/users', 'users')->name('admin.users');
+});
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
