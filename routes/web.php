@@ -28,9 +28,21 @@ Route::controller(ThemeController::class)->prefix('theme')->group(function () {
 // Admin routes
 Route::controller(AdminController::class)->prefix('admin')->group(function () {
     Route::get('/', 'index')->name('admin.index');
-    Route::get('/posts', 'posts')->name('admin.posts');
     Route::get('/categories', 'categories')->name('admin.categories');
+    // posts routes
+    Route::get('/posts', 'posts')->name('admin.posts');
+    Route::get('/createPost', 'create')->name('admin.createPost');
+    Route::post('/storePost', 'store')->name('admin.storePost');
+    Route::get('/editPost/{post}', 'edit')->name('admin.editPost');
+    Route::put('/updatePost/{post}', 'update')->name('admin.updatePost');
+    Route::delete('/deletePost/{post}', 'destroy')->name('admin.deletePost');
+    // user routes
     Route::get('/users', 'users')->name('admin.users');
+    Route::get('/createUser', 'createUser')->name('admin.createUser');
+    Route::post('/storeUser', 'storeUser')->name('admin.storeUser');
+    Route::get('/editUser/{user}', 'editUser')->name('admin.editUser');
+    Route::put('/updateUser/{user}', 'updateUser')->name('admin.updateUser');
+    Route::delete('/deleteUser/{user}', 'deleteUser')->name('admin.deleteUser');
 });
 
 

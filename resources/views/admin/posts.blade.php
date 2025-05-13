@@ -27,8 +27,8 @@
                         <td>{{ $post->category->name }}</td>
                         <td>{{ $post->created_at }}</td>
                         <td>
-                            <a href="{{-- route('admin.posts.edit', $post->id) --}}" class="btn btn-primary">Edit</a>
-                            <form action="{{-- route('admin.posts.destroy', $post->id) --}}" method="POST" style="display:inline;">
+                            <a href="{{route('admin.editPost', $post)}}" class="btn btn-primary">Edit</a>
+                            <form action="{{route('admin.deletePost', $post)}}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>
@@ -38,7 +38,7 @@
                     @endforeach
                 </tbody>
             </table>
-            <a href="{{-- route('admin.posts.create') --}}" class="btn btn-primary">Create Post</a>
+            <a href="{{route('admin.createPost')}}" class="btn btn-primary">Create Post</a>
         </div>
         </div>
     </div> 

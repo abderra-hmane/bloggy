@@ -4,6 +4,7 @@
 @section('content')
 
     <div class="container">
+    
         <div class="row">
             <div class="col-md-12">
                 <h1 class="text-center">Admins</h1>
@@ -29,10 +30,14 @@
                                 <td>{{ $user->email }}</td>
                                 <td>
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $user->id }}">
-                                        Delete
-                                    </button>
+                                    <form action="{{ route('admin.deleteUser', $user) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                    <a href="{{ route('admin.editUser', $user) }}" class="btn btn-success">Edit</a>
                                 </td>
+                                
                             </tr>
                         @endforeach
                     </tbody>
@@ -41,7 +46,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <a href="{{-- route('admin.users.create') --}}" class="btn btn-primary">Create Admin</a>
+                <a href="{{route('admin.createUser')}}" class="btn btn-primary">Create Admin</a>
             </div>
         </div>
     </div>
