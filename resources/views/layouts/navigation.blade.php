@@ -22,9 +22,9 @@
 								@foreach($categories as $category)
                                     <li><a href="{{route('theme.index', $category->id)}}">{{ $category->name }}</a></li>
                                 @endforeach
-								
-								<li><a href="contact.html">Contact Us</a></li>
-								<li><a href="about.html">About Us</a></li>
+
+								<li><a href="{{ route('theme.contact') }}">Contact Us</a></li>
+								<li><a href="{{ route('theme.about') }}">About Us</a></li>
                                 <li class="hidden sm:flex sm:items-center sm:ms-6">
                                     <x-dropdown align="right" width="48">
                                         <x-slot name="trigger">

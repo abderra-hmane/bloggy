@@ -9,6 +9,12 @@ use App\Http\Controllers\AdminController;
 Route::get('/', function () {
     return view('welcome');
 });
+// Theme routes
+Route::controller(ThemeController::class)->prefix('theme')->group(function () {
+    Route::get('/{category}', 'index')->name('theme.index');
+    Route::get('/Contact', 'contact')->name('theme.contact');
+    Route::get('/About', 'about')->name('theme.about');
+});
 // posts routes 
 Route::controller(PostController::class)->prefix('posts')->group(function () {
     Route::get('/', 'index')->name('posts.index');
@@ -19,13 +25,13 @@ Route::controller(PostController::class)->prefix('posts')->group(function () {
     Route::put('/{post}', 'update')->name('posts.update');
     Route::delete('/{post}', 'destroy')->name('posts.destroy');
 });
-// Theme routes
-Route::controller(ThemeController::class)->prefix('theme')->group(function () {
-    Route::get('/{category}', 'index')->name('theme.index');
-    Route::get('/Contact', 'contact')->name('theme.contact');
-    Route::get('/About', 'about')->name('theme.about');
-});
-// Admin routes
+// Admin routes without  middleware don't forget to add the middleware in your kernel
+
+// use App\Http\Middleware\IsAdmin;
+// Route::middleware(['auth', IsAdmin::class])->group(function () {
+//     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+// });
+
 Route::controller(AdminController::class)->prefix('admin')->group(function () {
     Route::get('/', 'index')->name('admin.index');
     Route::get('/categories', 'categories')->name('admin.categories');

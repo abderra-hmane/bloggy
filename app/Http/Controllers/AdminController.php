@@ -16,7 +16,7 @@ class AdminController extends Controller
         // Return the admin dashboard view
         $posts = Post::all();
         $categories = Category::all();
-        $users = User::where('admin', 0)->get();
+        $users = User::where('admin', 1)->get(); // Fetch only admin users
         return view('admin.index', compact('posts', 'categories', 'users'));
     }
     public function posts()
